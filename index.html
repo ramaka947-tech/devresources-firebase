@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop-Easy</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="offline" class="banner" hidden>Connexion perdue : vos modifications seront synchronisées au retour du réseau.</div>
+
+<header class="top">
+  <div class="brand">Shop-Easy</div>
+
+  <div class="mid">
+    <div id="seg" class="seg" hidden>
+      <button id="navHome" class="nav">Accueil</button>
+      <button id="navFav" class="nav">Favoris <span class="heart">♥</span></button>
+    </div>
+  </div>
+
+  <div class="right">
+    <span id="status" class="status">Non connecté</span>
+    <div id="userBox" class="userbox" hidden>
+      <button id="userBtn" class="avatar" aria-label="Mon compte">?</button>
+      <div id="userMenu" class="menu" hidden>
+        <small>Connecté en tant que</small>
+        <b id="userEmail"></b>
+        <hr>
+        <button id="logout" class="out">Se déconnecter</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Authentification ===== -->
+<section id="authView" class="glass auth" hidden>
+  <h1 id="authTitle">Connexion</h1>
+  <form id="authForm" novalidate>
+    <label>Email<input type="email" id="email" autocomplete="email" required></label>
+    <label>Mot de passe<input type="password" id="password" autocomplete="current-password" minlength="6" required></label>
+    <p id="authError" class="err" role="alert"></p>
+    <button class="btn" id="authBtn">Se connecter</button>
+  </form>
+  <p class="sw"><span id="swText">Pas encore de compte ?</span> <a href="#" id="swLink">Créer un compte</a></p>
+</section>
+
+<!-- ===== Application ===== -->
+<main id="appView" class="wrap" hidden>
+  <div class="toolbar">
+    <select id="fCat"><option value="">Toutes les catégories</option></select>
+    <button class="btn" id="openAdd">+ Ajouter une ressource</button>
+  </div>
+  <p id="state" class="state"></p>
+  <ul id="list" class="list"></ul>
+</main>
+
+<!-- Modale ajout / modification -->
+<dialog id="dlg">
+  <form id="resForm" novalidate>
+    <h2 id="formTitle">Ajouter une ressource</h2>
+    <label>Titre<input id="title" maxlength="100"></label>
+    <label>URL<input id="url" placeholder="https://..."></label>
+    <label>Catégorie
+      <select id="category">
+        <option>Documentation</option><option>Tutoriel</option><option>Outil</option>
+        <option>Article</option><option>Vidéo</option><option>Autre</option>
+      </select>
+    </label>
+    <label>Prix (laisser vide = gratuit)
+      <div class="pr">
+        <input id="price" type="number" min="0" step="0.01" placeholder="0">
+        <select id="currency">
+          <option value="XOF" selected>FCFA</option>
+          <option value="EUR">Euro (€)</option>
+          <option value="USD">Dollar ($)</option>
+          <option value="GBP">Livre (£)</option>
+          <option value="MAD">Dirham (MAD)</option>
+        </select>
+      </div>
+    </label>
+    <label>Description<input id="description" maxlength="300"></label>
+    <p id="formError" class="err" role="alert"></p>
+    <div class="actions">
+      <button type="button" class="small" id="cancelEdit">Annuler</button>
+      <button class="btn" id="saveBtn">Ajouter</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Modale de confirmation de suppression -->
+<dialog id="delDlg" class="sm">
+  <h2>Supprimer cette ressource ?</h2>
+  <p class="delmsg">« <span id="delName"></span> » sera supprimée définitivement.</p>
+  <p id="delError" class="err" role="alert"></p>
+  <div class="actions">
+    <button type="button" class="small" id="delCancel">Annuler</button>
+    <button type="button" class="btn danger" id="delOk">Supprimer</button>
+  </div>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
